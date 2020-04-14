@@ -14,13 +14,16 @@ mouseItem.forEach(item => {
   e.target.style.transition = '0.5s'})
 });
 
-//event 3 - dblclick; changes background to yellow and text to black
+//event 3 - dblclick. Changes background to yellow and text to black
 const button = document.querySelector('.btn');
+
 
 button.addEventListener("dblclick", (e) => {
   e.target.style.backgroundColor = 'yellow';
   e.target.style.color = 'black';
   e.target.style.fontSize = '3rem';
+  button.textContent = 'Clicked!';
+  console.log('element was clicked')
 });
 
 //event 4 - keydown. Turns title invisible momentarily.
@@ -55,27 +58,43 @@ body.addEventListener('wheel', function once(){
   body.removeEventListener('wheel', once);
 });
 
-// event 7 - drag banner img
-const bannerImg = document.querySelector('.intro > img' );
-bannerImg.addEventListener('drag', (e) => e.target.style.transform = 'rotate(180deg)');
+// event 7 - drag. Rotates banner img by 180 degrees
+const destinationImg = document.querySelector('.content-destination img' );
+destinationImg.addEventListener('drag', (e) => {
+  e.target.style.transform = 'rotate(180deg)'
+});
 
-// event 8 -load
-window.addEventListener('load', function(event) {
+//event 8 - dragend. Img remains rotated and decreases in size by 75%.
+destinationImg.addEventListener('dragend', (e) => {
+  e.target.style.width = '25%'
+  e.target.style.transform = 'rotate(180deg), '
+});
+
+// event 9 - load. Prints document on when page is loaded.
+window.addEventListener('load', () => {
   print();
 });
 
-// event 9 - resize
-window.addEventListener('resize', () => alert("I've been resized"))
-
-//event 10 - mouseenter. Turns
-const navContainer = document.querySelector(".intro");
-const header4 = document.querySelector('h4')
-navContainer.addEventListener("mouseenter", () => {
-  header4.style.color = "green";
+// event 10 - resize. Alert pops up when window has been resized.
+window.addEventListener('resize', () => {
+  alert("I've been resized");
 });
 
+//stop propagation
+body.addEventListener('click', (e)=>{
+  e.target.style.backgroundColor = 'slategray';
+  console.log('clicked')
+})
+
+introPara = document.querySelector('.intro p')
+introPara.addEventListener('click', (e)=>{
+  e.target.style.backgroundColor = 'green';
+  console.log('clicked')
+  e.stopPropagation();
+})
+
 //prevents from reloading page on click
-const navItems = document.querySelector('')
+const navItems = document.querySelector('.nav')
 navItems.addEventListener('click', (e) => {e.preventDefault();
-console.log("clicked on navlink");}
+console.log("You've clicked on one of the menu links.");}
 );
